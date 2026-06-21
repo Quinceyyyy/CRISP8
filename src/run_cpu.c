@@ -1,6 +1,9 @@
 
 #include "cpu.h"
 #include "utils.h"
+#include "window.h"
+
+#include "raylib.h"
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -28,6 +31,8 @@ int run_cpu(int argc, char *argv[])
 
     uint16_t opcode = 0;
 
+    // init_window();
+
     for (;;) {
         opcode = fetch_opcode(&cpu);
         if (cpu.halted || opcode == 0) {
@@ -35,6 +40,7 @@ int run_cpu(int argc, char *argv[])
         }
         cpu.pc += 2;
         decode_opcode(&cpu, opcode); 
+
     }
 
     return 0;
