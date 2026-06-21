@@ -28,12 +28,9 @@ typedef struct cpu {
     bool halted;
 } Cpu;
 
-// INITS
+    int run_cpu(int argc, char *argv[]);
 
-int run_cpu(int argc, char *argv[]);
-
-
-uint16_t fetch_opcode(Cpu *cpu);
-int decode_opcode(Cpu *cpu, uint16_t opcode);
+    uint16_t fetch_opcode(Cpu *cpu);
+    int decode_opcode(Cpu *cpu, uint16_t opcode);
 
 #endif
