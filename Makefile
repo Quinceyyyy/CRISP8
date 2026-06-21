@@ -5,6 +5,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra
 INCLUDES = -I ./include/
 DEPFLAGS = -MMD -MP
+LDFLAGS = -lraylib -lm
 
 SRC_DIR = src
 BUILD_DIR = build
@@ -28,7 +29,7 @@ TEST_TARGET = unit_tests
 all: $(TARGET) $(ROOT_TARGET)
 
 $(TARGET): $(OBJ) | $(BIN_DIR)
-	$(CC) $(OBJ) $(CFLAGS) -o $(TARGET)
+	$(CC) $(OBJ) $(CFLAGS) $(LDFLAGS) -o $(TARGET)
 
 $(ROOT_TARGET): $(TARGET)
 	cp $(TARGET) $(ROOT_TARGET)
