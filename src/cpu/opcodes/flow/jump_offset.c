@@ -7,5 +7,8 @@
 
 void exec_jump_offset(Cpu *cpu, uint16_t opcode)
 {
+    uint16_t dest_addr = opcode & 0x0FFF;
+    cpu->pc = dest_addr + cpu->v_registers[V0];
+
     printf("[exec_jump_offset] Status: Jumping to offset address 0x%04X from pc 0x%04X.\n", opcode, cpu->pc);
 }

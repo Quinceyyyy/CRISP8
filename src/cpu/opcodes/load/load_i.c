@@ -2,9 +2,11 @@
 #include "cpu.h"
 #include "opcodes.h"
 
-#include <stdio.h>
+#include <stdint.h>
+
 
 void exec_load_i(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_load_i] Status: Loading address NNN into I for opcode 0x%04X.\n", opcode);
+    uint16_t dest_addr = opcode & 0x0FFF;
+    cpu->index_register = dest_addr;
 }

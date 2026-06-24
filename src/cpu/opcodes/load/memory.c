@@ -2,6 +2,7 @@
 #include "cpu.h"
 #include "opcodes.h"
 
+#include <stdint.h>
 #include <stdio.h>
 
 
@@ -12,10 +13,22 @@ void exec_ld_f_vx(Cpu *cpu, uint16_t opcode)
 
 void exec_ld_i_vx(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_ld_i_vx] Status: Storing V0..Vx into memory starting at I for opcode 0x%04X.\n", opcode);
+    uint8_t X = (opcode >> 8) & 0xF;
+
+    for (uint16_t i = 0; i <= X; i++) {
+        if (cpu->index_register + i < RAM_MEMORY) {
+            cpu->memory[cpu->index_register + i] = cpu->v_registers[i];
+        }
+    }
 }
 
 void exec_ld_vx_i(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_ld_vx_i] Status: Loading V0..Vx from memory starting at I for opcode 0x%04X.\n", opcode);
+    uint8_t X = (opcode >> 8) & 0xF;
+
+    for (uint16_t i = 0; i <= X; i++) {
+        if (cpu->index_register + i < RAM_MEMORY) {
+            cpu->v_registers[i] = cpu->memory[cpu->index_register + i];
+        }
+    }
 }
