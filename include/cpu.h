@@ -13,6 +13,26 @@
 
     #define ROM_START_ADDRESS 0x200 // 512 bytes
     #define ROM_END_ADDRESS  0xFFF //4095 bytes
+    
+    #define CYCLES_PER_FRAME 10
+
+    /* V register indices -- match CHIP-8 spec naming convention */
+    #define V0  0
+    #define V1  1
+    #define V2  2
+    #define V3  3
+    #define V4  4
+    #define V5  5
+    #define V6  6
+    #define V7  7
+    #define V8  8
+    #define V9  9
+    #define VA  10
+    #define VB  11
+    #define VC  12
+    #define VD  13
+    #define VE  14
+    #define VF  15
 
 typedef struct cpu {
     uint8_t memory[RAM_MEMORY];
