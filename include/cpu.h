@@ -9,12 +9,16 @@
     #define MAX_REGISTERS 16
     #define STACK_SIZE 16
     #define SCREEN_SIZE (64 * 32) // Per specs
+    #define SCREEN_HEIGHT 32 
+    #define SCREEN_WIDTH 64 
     #define MAX_INPUTS 16
 
     #define ROM_START_ADDRESS 0x200 // 512 bytes
     #define ROM_END_ADDRESS  0xFFF //4095 bytes
     
     #define CYCLES_PER_FRAME 10
+
+    #define SPRITE_WIDTH 8 // 8 pixels wide
 
     /* V register indices -- match CHIP-8 spec naming convention */
     #define V0  0
