@@ -28,6 +28,9 @@ TEST_TARGET = unit_tests
 
 all: $(TARGET) $(ROOT_TARGET)
 
+debug: CFLAGS += -DDEBUG -g
+debug: fclean $(TARGET) $(ROOT_TARGET)
+
 $(TARGET): $(OBJ) | $(BIN_DIR)
 	$(CC) $(OBJ) $(CFLAGS) $(LDFLAGS) -o $(TARGET)
 
@@ -45,7 +48,7 @@ $(TEST_OBJ_DIR)/%.o: $(TEST_DIR)/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) $(DEPFLAGS) -c $< -o $@
 
 tests_run: $(TEST_OBJ) $(filter-out $(OBJ_DIR)/main.o, $(OBJ))
-	$(CC) $(TEST_OBJ) $(filter-out $(OBJ_DIR)/main.o, $(OBJ)) $(CFLAGS) -o $(TEST_TARGET)
+	$(CC) $(TEST_OBJ) $(filter-out $(OBJ_DIR)/main.o, $(OBJ)) $(CFLAGS) $(LDFLAGS) -o $(TEST_TARGET)
 	./$(TEST_TARGET)
 
 $(OBJ_DIR):
