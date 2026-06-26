@@ -98,8 +98,6 @@ int decode_opcode(Cpu *cpu, uint16_t opcode)
 {
     uint16_t prefix_bit = opcode >> 12;
 
-    printf("[decode_opcode] Status: prefix bit -> 0x%04X from opcode <0x%04X>.\n", prefix_bit, opcode);
-
     switch (prefix_bit) {
         case OPCODE_PREFIX_0: handle_prefix_0x0(cpu, opcode);
             break;
@@ -107,11 +105,27 @@ int decode_opcode(Cpu *cpu, uint16_t opcode)
             break;
         case OPCODE_CALL: exec_call(cpu, opcode);
             break;
+        case OPCODE_SE_BYTE: exec_se_byte(cpu, opcode);
+            break;
+        case OPCODE_SNE_BYTE: exec_sne_byte(cpu, opcode);
+            break;
+        case OPCODE_SE_REG: exec_se_reg(cpu, opcode);
+            break;
         case OPCODE_STORE: exec_store(cpu, opcode);
             break;
         case OPCODE_ADD_BYTE: exec_add(cpu, opcode);
             break;
         case OPCODE_PREFIX_8: handle_prefix_0x8(cpu, opcode);
+            break;
+        case OPCODE_SNE_REG: exec_sne_reg(cpu, opcode);
+            break;
+        case OPCODE_LOAD_I: exec_load_i(cpu, opcode);
+            break;
+        case OPCODE_JUMP_OFFSET: exec_jump_offset(cpu, opcode);
+            break;
+        case OPCODE_RAND: exec_rand(cpu, opcode);
+            break;
+        case OPCODE_DRAW: exec_draw(cpu, opcode);
             break;
         case OPCODE_PREFIX_E: handle_prefix_0xE(cpu, opcode);
             break;
