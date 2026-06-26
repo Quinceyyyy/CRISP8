@@ -1,14 +1,17 @@
 
 #include "cpu.h"
 #include "opcodes.h"
+#include "font.h"
 
 #include <stdint.h>
-#include <stdio.h>
 
 
 void exec_ld_f_vx(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_ld_f_vx] Status: Loading address of sprite for digit Vx into I for opcode 0x%04X.\n", opcode);
+    uint8_t VX = (opcode >> 8) & 0xF;
+    uint8_t fval = (cpu->v_registers[VX] & 0xF);
+
+    cpu->index_register = FONT_START_ADDR + (fval * 5);
 }
 
 void exec_ld_i_vx(Cpu *cpu, uint16_t opcode)
