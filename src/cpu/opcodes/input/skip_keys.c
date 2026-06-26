@@ -3,14 +3,24 @@
 #include "opcodes.h"
 
 #include <stdint.h>
-#include <stdio.h>
+
 
 void exec_skp(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_skp] Status: Checking if key is pressed for opcode 0x%04X.\n", opcode);
+    uint8_t VX = (opcode >> 8) & 0xF;
+    uint8_t key = cpu->v_registers[VX] & 0xF;
+
+    if (cpu->input_pad[key] != 0) {
+        cpu->pc += 2;
+    }
 }
 
 void exec_sknp(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_sknp] Status: Checking if key is NOT pressed for opcode 0x%04X.\n", opcode);
+    uint8_t VX = (opcode >> 8) & 0xF;
+    uint8_t key = cpu->v_registers[VX] & 0xF;
+
+    if (cpu->input_pad[key] == 0) {
+        cpu->pc += 2;
+    }
 }
