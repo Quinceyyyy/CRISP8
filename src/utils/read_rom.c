@@ -56,7 +56,7 @@ int read_rom(Cpu *cpu, char *rom_file)
         goto cleanup;
     }
 
-    print_memory(cpu, fsize);
+    // print_memory(cpu, fsize);
     ret = 0;
 
 cleanup:

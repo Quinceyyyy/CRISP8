@@ -34,9 +34,10 @@ static void cpu_cycles(Cpu *cpu)
             break;
         }
 
-#ifdef DEBUG
-        trace_opcode(cpu, opcode);
-#endif
+        #ifdef DEBUG
+            trace_opcode(cpu, opcode);
+        #endif
+
         cpu->pc += 2;
         decode_opcode(cpu, opcode);
     }

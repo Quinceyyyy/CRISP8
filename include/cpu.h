@@ -16,7 +16,7 @@
     #define ROM_START_ADDRESS 0x200 // 512 bytes
     #define ROM_END_ADDRESS  0xFFF //4095 bytes
     
-    #define CYCLES_PER_FRAME 10
+    #define CYCLES_PER_FRAME 14 // 14 * 60 = 840hs should feel better
 
     #define SPRITE_WIDTH 8 // 8 pixels wide
 
