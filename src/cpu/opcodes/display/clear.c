@@ -1,11 +1,10 @@
 
 #include "cpu.h"
 
-#include <stdint.h>
-#include <stdio.h>
+#include <string.h>
 
 
 void exec_clear_screen(Cpu *cpu)
 {
-    printf("[exec_clear_screen] Status: cleared screen buffer.\n");
+    memset(cpu->display_buffer, 0, sizeof(cpu->display_buffer));
 }
