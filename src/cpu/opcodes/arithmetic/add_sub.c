@@ -3,21 +3,49 @@
 #include "opcodes.h"
 
 #include <stdint.h>
-#include <stdio.h>
+
 
 void exec_add_reg(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_add_reg] Status: Performing addition for opcode 0x%04X.\n", opcode);
+    uint8_t reg_X = (opcode >> 8) & 0xF;
+    uint8_t reg_Y = (opcode >> 4) & 0xF;
+
+    uint16_t res = (uint16_t)cpu->v_registers[reg_X] + (uint16_t)cpu->v_registers[reg_Y];
+    if (res > 0xFF) {
+        cpu->v_registers[VF] = 1;
+    } else {
+        cpu->v_registers[VF] = 0;
+    }
+
+    cpu->v_registers[reg_X] = (uint8_t)res;
 }
 
 
 void exec_sub(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_sub] Status: Performing subtraction for opcode 0x%04X.\n", opcode);
+    uint8_t reg_X = (opcode >> 8) & 0xF;
+    uint8_t reg_Y = (opcode >> 4) & 0xF;
+
+    if (cpu->v_registers[reg_X] >= cpu->v_registers[reg_Y]) {
+        cpu->v_registers[VF] = 1;
+    } else {
+        cpu->v_registers[VF] = 0;
+    }
+
+    cpu->v_registers[reg_X] -= cpu->v_registers[reg_Y];
 }
 
 
 void exec_subn(Cpu *cpu, uint16_t opcode)
 {
- printf("[exec_subn] Status: Performing reverse subtraction for opcode 0x%04X.\n", opcode);
+    uint8_t reg_X = (opcode >> 8) & 0xF;
+    uint8_t reg_Y = (opcode >> 4) & 0xF;
+
+    if (cpu->v_registers[reg_Y] >= cpu->v_registers[reg_X]) {
+        cpu->v_registers[VF] = 1;
+    } else {
+        cpu->v_registers[VF] = 0;
+    }
+
+    cpu->v_registers[reg_X] = cpu->v_registers[reg_Y] - cpu->v_registers[reg_X];
 }

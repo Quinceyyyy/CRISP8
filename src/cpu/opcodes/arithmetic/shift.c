@@ -3,15 +3,22 @@
 #include "opcodes.h"
 
 #include <stdint.h>
-#include <stdio.h>
+
+// Original CHIP8 did VY shift instead.
 
 void exec_shr(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_shr] Status: Shifting Vx right by 1 for opcode 0x%04X.\n", opcode);
+    uint8_t VX = (opcode >> 8) & 0xF;
+    uint8_t LSB = cpu->v_registers[VX] & 1;
+    cpu->v_registers[VF] = LSB;
+    cpu->v_registers[VX] >>= 1;
 }
 
 
 void exec_shl(Cpu *cpu, uint16_t opcode)
 {
-    printf("[exec_shl] Status: Shifting Vx left by 1 for opcode 0x%04X.\n", opcode);
+    uint8_t VX = (opcode >> 8) & 0xF;
+    uint8_t MSB = (cpu->v_registers[VX] >> 7) & 1;
+    cpu->v_registers[VF] = MSB;
+    cpu->v_registers[VX] <<= 1;
 }
