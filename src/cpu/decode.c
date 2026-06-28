@@ -133,10 +133,9 @@ int decode_opcode(Cpu *cpu, uint16_t opcode)
             break;
         default:
             fprintf(stderr, "[decode_opcode] Error: Unknown opcode prefix found: 0x%04x.\n", prefix_bit);
-            // cpu->halted = true;
+            cpu->halted = true;
             break;
     }
 
-    // printf("[decode_opcode] Status: opcode at pc [%d]: 0x%04x\n", cpu->pc, opcode);
     return 0;
 }
