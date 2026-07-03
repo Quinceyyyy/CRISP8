@@ -3,3 +3,4 @@ crisp8
 .cache
 *.json
 build
+flake.lock
